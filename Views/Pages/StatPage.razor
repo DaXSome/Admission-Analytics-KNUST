@@ -1,0 +1,154 @@
+@page "/Stat/{StatType}"
+@using Views.Data;
+@inject IPersonService PersonService;
+
+<h1>@StatType</h1>
+
+
+@{
+
+    if (@IsLoading)
+    {
+        <Loading></Loading>
+    }
+    else
+    {
+
+
+        switch (@StatType)
+        {
+            case "Courses":
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+
+                            int cIndex = 1;
+                            @foreach (CourseTotal courseTotal in @CourseTotals)
+                            {
+                                <tr>
+                                    <th scope="row">@cIndex</th>
+                                    <th scope="row">@courseTotal.Course</th>
+                                    <th scope="row">@courseTotal.Total</th>
+                                    @* <td><a href="/Exam/@ExamKey/@ExamQuestion.AltKey">View</a></td> *@
+                                </tr>
+                                cIndex++;
+
+                            }
+                        }
+
+        </tbody>
+    </table>
+                break;
+            case "Admissions":
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Student ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+
+                            int aIndex = 1;
+                            @foreach (Person person in @AdmissionAll)
+                            {
+                                <tr>
+                                    <th scope="row">@aIndex</th>
+                                    <th scope="row">@person.Course</th>
+                                    <th scope="row">@person.FirstName</th>
+                                    <th scope="row">@person.Surname</th>
+                                    <th scope="row">@person.StudentID</th>
+                                    @* <td><a href="/Exam/@ExamKey/@ExamQuestion.AltKey">View</a></td> *@
+                                </tr>
+                                aIndex++;
+
+                            }
+                        }
+
+        </tbody>
+    </table>
+                break;
+            case "Degrees":
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+
+                            int dIndex = 1;
+                            @foreach (CourseTotal degreeTotal in @DegreeTotals)
+                            {
+                                <tr>
+                                    <th scope="row">@dIndex</th>
+                                    <th scope="row">@degreeTotal.Course</th>
+                                    <th scope="row">@degreeTotal.Total</th>
+                                    @* <td><a href="/Exam/@ExamKey/@ExamQuestion.AltKey">View</a></td> *@
+                                </tr>
+                                dIndex++;
+
+                            }
+                        }
+
+        </tbody>
+    </table>
+                break;
+            default:
+                <Loading></Loading>
+                break;
+        }
+    }
+}
+
+@code
+{
+    [Parameter]
+    public string StatType { get; set; }
+    private IEnumerable<CourseTotal> CourseTotals;
+    private IEnumerable<CourseTotal> DegreeTotals;
+    private IEnumerable<Person> AdmissionAll;
+
+    private bool IsLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        switch (StatType)
+        {
+            case "Courses":
+                CourseTotals = await PersonService.GetCourseTotals();
+                break;
+            case "Admissions":
+                AdmissionAll = await PersonService.GetAdmissionAll();
+                break;
+            case "Degrees":
+                DegreeTotals = await PersonService.GetDegreeTotals();
+                break;
+            default:
+                break;
+        }
+
+        IsLoading = false;
+
+        StateHasChanged();
+
+    }
+}

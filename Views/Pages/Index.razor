@@ -1,0 +1,45 @@
+﻿@page "/"
+@using Views.Data;
+@inject IPersonService PersonService;
+
+<PageTitle>Admission Analytics | KNUST</PageTitle>
+
+@if (@CourseTotals == null)
+{
+    <Loading></Loading>
+}
+else
+{
+
+    <div class="container">
+    <div class="row">
+        <StatCard Title="Total Courses" SubTitle=@CourseTotals.Count().ToString() Color="success" StatType="Courses">
+        </StatCard>
+
+        <StatCard Title="Total Degrees" SubTitle=@DegreeTotals.Count().ToString() Color="warning" StatType="Degrees">
+        </StatCard>
+
+        <StatCard Title="Total Admissions" SubTitle=@AdmissionAll.Count().ToString() Color="danger"
+            StatType="Admissions">
+        </StatCard>
+
+
+    </div>
+</div>
+
+}
+
+@code
+{
+
+    private IEnumerable<CourseTotal> CourseTotals;
+    private IEnumerable<CourseTotal> DegreeTotals;
+    private IEnumerable<Person> AdmissionAll;
+
+    protected override async Task OnInitializedAsync()
+    {
+        CourseTotals = await PersonService.GetCourseTotals();
+        DegreeTotals = await PersonService.GetDegreeTotals();
+        AdmissionAll = await PersonService.GetAdmissionAll();
+    }
+}

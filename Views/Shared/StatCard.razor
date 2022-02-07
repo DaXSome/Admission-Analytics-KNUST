@@ -1,0 +1,27 @@
+<div class="col-sm">
+    <div class="card text-center text-white bg-@Color mb-3" style="max-width: 18rem;">
+        <div class="card-header">Statistics</div>
+        <div class="card-body">
+            <h5 class="card-title">@Title</h5>
+            <p class="card-text">@SubTitle</p>
+            <a href="/Stat/@StatType" class="btn btn-primary">View more</a>
+        </div>
+    </div>
+
+</div>
+
+@code
+{
+    [Parameter]
+    public string Title { get; set; }
+    [Parameter]
+
+    public string Color { get; set; }
+    [Parameter]
+
+    public string SubTitle { get; set; }
+
+    [Parameter]
+
+    public string StatType { get; set; }
+}
