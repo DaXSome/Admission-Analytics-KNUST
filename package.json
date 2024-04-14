@@ -22,6 +22,7 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12"
+    "cheerio": "^1.0.0-rc.12",
+    "prettier-plugin-svelte": "^3.2.3"
   }
 }
