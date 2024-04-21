@@ -2,6 +2,7 @@
   import featured from "./data/2023-2024.json";
   import { onMount } from "svelte";
   import Hero from "./components/Hero.svelte";
+  import Degrees from "./components/Degrees.svelte";
   const featuredYear = "2023 - 2024";
 
   const applicants = featured.applicants;
@@ -40,6 +41,7 @@
 <main class="">
   {#if canStart}
     <Hero {featuredYear} totalApplicants={applicants.length} />
+    <Degrees degrees={degreeCounter} />
   {/if}
 </main>
 
