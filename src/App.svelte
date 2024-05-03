@@ -3,6 +3,8 @@
   import { onMount } from "svelte";
   import Hero from "./components/Hero.svelte";
   import Degrees from "./components/Degrees.svelte";
+  import { preprocess } from "svelte/compiler";
+  import Programmes from "./components/Programmes.svelte";
   const featuredYear = "2023 - 2024";
 
   const applicants = featured.applicants;
@@ -42,6 +44,7 @@
   {#if canStart}
     <Hero {featuredYear} totalApplicants={applicants.length} />
     <Degrees degrees={degreeCounter} />
+    <Programmes programmes={programmesCounter} />
   {/if}
 </main>
 
