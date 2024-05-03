@@ -3,8 +3,9 @@
   import { onMount } from "svelte";
   import Hero from "./components/Hero.svelte";
   import Degrees from "./components/Degrees.svelte";
-  import { preprocess } from "svelte/compiler";
   import Programmes from "./components/Programmes.svelte";
+  import Campus from "./components/Campus.svelte";
+
   const featuredYear = "2023 - 2024";
 
   const applicants = featured.applicants;
@@ -29,9 +30,14 @@
     count: applicants.filter(({ programme }) => programme === p).length
   }));
 
-  const isObuasiCampusCount = applicants.filter(({ programme }) =>
-    programme.toLowerCase().includes("obuasi")
-  ).length;
+  const campusCounter = {
+    obuasi: applicants.filter(({ programme }) =>
+      programme.toLowerCase().includes("obuasi")
+    ).length,
+    main: applicants.filter(
+      ({ programme }) => !programme.toLowerCase().includes("obuasi")
+    ).length
+  };
 
   $: canStart = false;
 
@@ -45,6 +51,7 @@
     <Hero {featuredYear} totalApplicants={applicants.length} />
     <Degrees degrees={degreeCounter} />
     <Programmes programmes={programmesCounter} />
+    <Campus campus={campusCounter} />
   {/if}
 </main>
 
