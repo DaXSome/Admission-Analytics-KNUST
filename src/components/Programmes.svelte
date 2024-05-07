@@ -77,7 +77,7 @@
 </script>
 
 <div>
-  <div class="h-screen">
+  <div class="h-screen flex flex-col items-center justify-center">
     <div class="flex flex-wrap items-center justify-center">
       {#each programmesText as text, index (index)}
         <p transition:fade class="text-4xl font-bold text-gray-800">

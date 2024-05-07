@@ -26,7 +26,7 @@
   });
 </script>
 
-<div class="h-screen">
+<div class="h-screen flex flex-col items-center justify-center">
   <div class="flex flex-wrap items-center justify-center">
     {#each heroText as text, index (index)}
       <p transition:fade class="text-4xl font-bold text-gray-800">
@@ -36,6 +36,11 @@
   </div>
 
   {#if applicantsCounter > 0}
-    <p transition:fly={{y: 700}} class="text-green-500 text-center text-[7rem] lg:text-[24rem]">{applicantsCounter}</p>
+    <p
+      transition:fly={{ y: 700 }}
+      class="text-green-500 text-center text-[7rem] lg:text-[24rem]"
+    >
+      {applicantsCounter}
+    </p>
   {/if}
 </div>
