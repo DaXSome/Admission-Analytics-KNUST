@@ -27,6 +27,14 @@
     new chartjs(ctx!, {
       type: "bar",
       options: {
+        indexAxis: "y",
+        scales: {
+          y: {
+            ticks: {
+              autoSkip: false
+            }
+          }
+        },
         plugins: {
           datalabels: {
             labels: {
