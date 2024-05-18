@@ -32,7 +32,7 @@
                 (acc, d) => (acc as number) + (d as number),
                 0
               )! as number;
-              const percentage = Math.floor((value / sum) * 100);
+              const percentage = Math.round((value / sum) * 100);
               const currentCampus = Object.keys(campus).find(
                 (c) => campus[c as keyof Node] == value
               );
