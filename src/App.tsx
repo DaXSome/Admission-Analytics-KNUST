@@ -308,14 +308,14 @@ export default function App() {
         </CardContent>
       </Card>
 
-      <Card className="max-h-[600px] overflow-y-scroll">
+      <Card >
         <CardHeader>
           <CardTitle> All Courses Enrollment</CardTitle>
           <CardDescription>
             Number of students enrolled for all courses
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="max-h-[600px] overflow-y-scroll">
           <Table>
             <TableCaption>
               Number of students enrolled for all courses
