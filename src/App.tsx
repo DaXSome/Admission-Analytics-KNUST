@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -27,8 +27,6 @@ import {
   TableHeader,
   TableRow
 } from "./components/ui/table";
-import twentyOne from "./datasets/2021-2022.json";
-import twentyThree from "./datasets/2023-2024.json";
 
 interface Dataset {
   name: string;
@@ -37,14 +35,32 @@ interface Dataset {
   course: string;
 }
 
-const datasets = {
-  "2021": twentyOne as Dataset[],
-  "2023": twentyThree as Dataset[]
+const loadDataset = async (file: string) => {
+  const data = await import(`./datasets/${file}.json`);
+  return data.default as Dataset[];
 };
 
-const years = Object.keys(datasets) as (keyof typeof datasets)[];
-
 export default function App() {
+  const [datasets, setDatasets] = useState<Record<string, Dataset[]>>({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const [twentyOne, twentyThree] = await Promise.all([
+        loadDataset("2021-2022"),
+        loadDataset("2023-2024")
+      ]);
+
+      setDatasets({
+        "2021": twentyOne,
+        "2023": twentyThree
+      });
+    };
+
+    fetchData();
+  }, []);
+
+  const years = Object.keys(datasets) as (keyof typeof datasets)[];
+
   const [selectedYears, setSelectedYears] = useState(years);
 
   const handleYearChange = (year: (typeof years)[number]) => {
