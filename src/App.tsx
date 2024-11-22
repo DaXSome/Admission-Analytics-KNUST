@@ -86,10 +86,21 @@ export default function App() {
   ) => {
     const degreeCounts = datasets[year].reduce(
       (acc, d) => {
-        if (!acc[d[value]]) {
-          acc[d[value]] = 0;
+        let target = d[value];
+
+        if (!target) return acc;
+
+        // Remove the trailing periods for consistency
+        if (value === "degree") {
+          target = target.replace(/\.$/, "").trim();
         }
-        acc[d[value]]++;
+
+        if (!acc[target]) {
+          acc[target] = 0;
+        }
+
+        acc[target]++;
+
         return acc;
       },
       {} as Record<string, number>
@@ -104,9 +115,10 @@ export default function App() {
 
   const degrees = Array.from(
     new Set(
-      Object.values(datasets)
+      selectedDegrees
+        .map((d) => Object.keys(d))
         .flat()
-        .map((d) => d.degree)
+        .filter((d) => d !== "year")
     )
   );
 
@@ -308,7 +320,7 @@ export default function App() {
         </CardContent>
       </Card>
 
-      <Card >
+      <Card>
         <CardHeader>
           <CardTitle> All Courses Enrollment</CardTitle>
           <CardDescription>
