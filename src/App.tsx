@@ -27,6 +27,7 @@ import {
   TableHeader,
   TableRow
 } from "./components/ui/table";
+import AppSkeleton from "./components/AppSkeleton";
 
 interface Dataset {
   name: string;
@@ -212,6 +213,8 @@ export default function App() {
     "#85c1e9",
     "#f1948a"
   ];
+
+  if (years.length === 0) return <AppSkeleton />;
 
   return (
     <div className="container mx-auto p-4 space-y-8">
