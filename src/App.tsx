@@ -44,6 +44,10 @@ const loadDataset = async (file: string) => {
 export default function App() {
   const [datasets, setDatasets] = useState<Record<string, Dataset[]>>({});
 
+  const years = Object.keys(datasets) as (keyof typeof datasets)[];
+
+  const [selectedYears, setSelectedYears] = useState(years);
+
   useEffect(() => {
     const fetchData = async () => {
       const [twentyOne, twentyThree] = await Promise.all([
@@ -55,14 +59,12 @@ export default function App() {
         "2021": twentyOne,
         "2023": twentyThree
       });
+
+      setSelectedYears(["2021", "2023"]);
     };
 
     fetchData();
   }, []);
-
-  const years = Object.keys(datasets) as (keyof typeof datasets)[];
-
-  const [selectedYears, setSelectedYears] = useState(years);
 
   const handleYearChange = (year: (typeof years)[number]) => {
     setSelectedYears((prev) =>
