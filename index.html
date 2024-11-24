@@ -11,7 +11,10 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://knust-admission-analytics.owbird.site/" />
+    <meta
+      property="og:url"
+      content="https://knust-admission-analytics.owbird.site/"
+    />
     <meta
       property="og:title"
       content="KNUST Admission Analytics - Insights into KNUST Admissions"
@@ -20,14 +23,14 @@
       property="og:description"
       content="KNUST Admission Analytics - Insights into KNUST Admissions"
     />
-    <meta
-      property="og:image"
-      content="/ss.png"
-    />
+    <meta property="og:image" content="/ss.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://knust-admission-analytics.owbird.site/" />
+    <meta
+      property="twitter:url"
+      content="https://knust-admission-analytics.owbird.site/"
+    />
     <meta
       property="twitter:title"
       content="KNUST Admission Analytics - Insights into KNUST Admissions"
@@ -36,11 +39,23 @@
       property="twitter:description"
       content="KNUST Admission Analytics - Insights into KNUST Admissions"
     />
-    <meta
-      property="twitter:image"
-      content="/ss.png"
-    />
+    <meta property="twitter:image" content="/ss.png" />
     <title>KNUST Admission Analytics - Insights into KNUST Admissions</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-49DJHEEWQX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-49DJHEEWQX");
+    </script>
   </head>
   <body>
     <div id="root"></div>
