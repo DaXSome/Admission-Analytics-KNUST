@@ -55,12 +55,14 @@ export default function App() {
         loadDataset("2023-2024")
       ]);
 
-      setDatasets({
-        "2021": twentyOne,
-        "2023": twentyThree
-      });
+      const datasets = {
+        "2021/2022": twentyOne,
+        "2023/2024": twentyThree
+      };
 
-      setSelectedYears(["2021", "2023"]);
+      setDatasets(datasets);
+
+      setSelectedYears(Object.keys(datasets));
     };
 
     fetchData();
