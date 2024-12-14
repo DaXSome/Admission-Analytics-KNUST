@@ -49,6 +49,8 @@ export default function App() {
   const [selectedYears, setSelectedYears] = useState(years);
 
   useEffect(() => {
+    window.location.href = "https://daxsome.owbird.site/viz/knust-admission";
+
     const fetchData = async () => {
       const [twentyOne, twentyThree] = await Promise.all([
         loadDataset("2021-2022"),
